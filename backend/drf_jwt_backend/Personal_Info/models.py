@@ -10,17 +10,20 @@ class Personal_info(models.Model):
     weight = models.IntegerField()
     height = models.IntegerField()
 
-class Messages(models.Model):
+
+class Emergency_contact(models.Model):
     user = models.ForeignKey(User, on_delete=models.CASCADE)
-    first_check_in = models.CharField(max_length=100)
-    second_check_in = models.CharField(max_length=100)
-    final_warning = models.CharField(max_length=100)
 
 class Dater(models.Model):
     user = models.ForeignKey(User, on_delete=models.CASCADE)
     personal_info = models.ForeignKey(Personal_info, on_delete=models.CASCADE)
     date_info = models.CharField(max_length=100)
     unique_password = models.CharField(max_length=50)
-    messages = models.ForeignKey(Messages, on_delete=models.CASCADE)
+    emergency_contact= models.ForeignKey(Emergency_contact, on_delete=models.CASCADE, default=None)
 
-
+class Messages(models.Model):
+    dater = models.ForeignKey(Dater, on_delete=models.CASCADE)
+    emergency_contact = models.ForeignKey(Emergency_contact, on_delete=models.CASCADE, default=None)
+    first_check_in = models.CharField(max_length=100)
+    second_check_in = models.CharField(max_length=100)
+    final_warning = models.CharField(max_length=100)

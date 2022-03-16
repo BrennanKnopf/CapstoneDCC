@@ -1,5 +1,5 @@
 from rest_framework import serializers
-from .models import Personal_info, Messages, Dater
+from .models import Personal_info, Messages, Dater, Emergency_contact
 
 
 
@@ -12,7 +12,7 @@ class Personal_infoSerializer(serializers.ModelSerializer):
 class MessagesSerializer(serializers.ModelSerializer):
     class Meta:
         model = Messages
-        fields = ['id', 'first_check_in', 'second_check_in', 'name', 'final_warning']
+        fields = ['id', 'first_check_in', 'second_check_in', 'final_warning']
         depth = 1
 
 class DaterSerializer(serializers.ModelSerializer):
@@ -20,3 +20,8 @@ class DaterSerializer(serializers.ModelSerializer):
         model = Dater
         fields = ['id', 'personal_info', 'emergency_contact', 'date_info', 'user_id', 'unique_password', 'messages']
         depth = 1
+
+class Emergency_contactSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Emergency_contact
+        fields = ['id', 'user_id']
