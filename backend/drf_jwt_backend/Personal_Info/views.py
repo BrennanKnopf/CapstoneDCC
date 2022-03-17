@@ -12,6 +12,7 @@ from .serializers import Personal_infoSerializer
 def user_dater(request, pk):
     print(
         'User ', f"{request.user.id} {request.user.email} {request.user.username}")
+        
     if request.method == 'POST':
         serializer = DaterSerializer(data=request.data)
         if serializer.is_valid():
