@@ -18,7 +18,7 @@ class MessagesSerializer(serializers.ModelSerializer):
 class DaterSerializer(serializers.ModelSerializer):
     class Meta:
         model = Dater
-        fields = ['id', 'personal_info', 'emergency_contact', 'date_info', 'user_id', 'unique_password', 'messages']
+        fields = ['id', 'personal_info', 'emergency_contact', 'date_info', 'unique_password']
         depth = 1
 
 class Emergency_contactSerializer(serializers.ModelSerializer):

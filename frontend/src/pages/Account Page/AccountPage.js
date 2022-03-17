@@ -1,8 +1,13 @@
+import useCustomForm from "../../hooks/useCustomForm";
+import 
 import React from 'react';
 
 const AccountPage = () => {
     
-    
+
+    const [formData, handleInputChange, handleSubmit] = useCustomForm(
+        
+      );
     
     
     return ( 
@@ -106,10 +111,9 @@ const AccountPage = () => {
           />
         </label>
         <p style={{ fontSize: "12px" }}>
-          NOTE: Make this an uncommon password with characters, numbers, and
-          special characters!
+
         </p>
-        <button>Register!</button>
+        <button>Submit</button>
       </form>
     </div>
     );
