@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 
-  const Location = () => {
+  const Location = (props) => {
     const [lat, setLat] = useState(null);
     const [lng, setLng] = useState(null);
     const [status, setStatus] = useState(null);
