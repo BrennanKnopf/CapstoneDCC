@@ -67,16 +67,6 @@ function App(props) {
         <Route path="/login" element={<LoginPage />} />
       </Routes>
       <Footer />
-    {/* <h2>
-      React Geolocaiton Example
-    </h2>
-    <button onClick={getLocation}>Get Coordinates</button>
-    <h4>HTML5 Coordinates</h4>
-    <p> Latitude: {latitude}</p>
-    <p> Longitude: {longitude}</p>
-    <h4>Google Maps Reverse Geocoding</h4>
-    <p>Address: {userAddress}</p> */}
-
     </div>
   );
 }

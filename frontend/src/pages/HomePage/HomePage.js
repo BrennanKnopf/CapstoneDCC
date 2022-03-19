@@ -3,6 +3,8 @@ import { useEffect, useState } from "react";
 import axios from "axios";
 import useAuth from "../../hooks/useAuth";
 import MapContainer from "../../components/MapContainer/MapContainer";
+import Messages from "../../components/Messages/Messages";
+import DisplayMessage from "../../components/Messages/DisplayMessage";
 
 
 
@@ -18,9 +20,12 @@ const HomePage = (props) => {
   
   return (
     <div className="container">
-      <h1>Home Page for {user.username}!</h1>
-      <MapContainer  latitude={props.latitude} longitude= {props.longitude} />
-      
+       <div class="row">
+        <h1>Home Page for {user.username}!</h1>
+          <Messages />
+          <DisplayMessage />
+            <MapContainer  latitude={props.latitude} longitude= {props.longitude} />
+          </div>
     </div>
   );
 };

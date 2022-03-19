@@ -1,13 +1,10 @@
 import useCustomForm from "../../hooks/useCustomForm";
-import 
 import React from 'react';
 
 const AccountPage = () => {
     
 
-    const [formData, handleInputChange, handleSubmit] = useCustomForm(
-        
-      );
+    const [formData, handleInputChange, handleSubmit] = useCustomForm();
     
     
     return ( 

@@ -55,7 +55,7 @@ def user_personal_info(request,pk):
             return Response(serializer.data)
 
 @api_view(['GET'])
-@permission_classes([AllowAny])
+@permission_classes([IsAuthenticated])
 def get_all_messages(request, pk):
     messages = Messages.objects.filter(user_id=pk)
     serializer = MessagesSerializer(messages, many=True)
