@@ -10,7 +10,7 @@ const DateForm = (props) => {
     const [date_info, setDateInfo] = useState('')
     const [unique_password, setUniquePassword] = useState('')
     const [emergency_contact, setEmergencyContact] = useState('')
-    console.log(props.user.user_id)
+    
 
 
     function handleSubmit(event) {
@@ -20,6 +20,7 @@ const DateForm = (props) => {
             date_info: date_info,
             unique_password: unique_password,
             emergency_contact: emergency_contact,
+            
 
 
         };
