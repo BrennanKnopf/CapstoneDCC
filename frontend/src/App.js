@@ -29,7 +29,7 @@ function App(props) {
   console.log(latitude)
   const [longitude, setLongitude] = useState()
   console.log(longitude)
-  const [userAddress, setUserAddress] = useState()
+
 
 
   function getLocation() {
