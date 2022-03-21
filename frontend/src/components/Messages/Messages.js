@@ -4,14 +4,12 @@ import React, {useState} from 'react';
 
 const Messages = (props) => {
     
-    const[name, setName] = useState('');
     const [message, setMessage] = useState('');
     
    
     function handleSubmit(event) {
         event.preventDefault();
         let newMessage = {
-            name: name,
             message: message
         };
         console.log(newMessage);
@@ -27,10 +25,6 @@ const Messages = (props) => {
     
     return ( 
         <form onSubmit={handleSubmit} className ='form-grid' >
-            <div className='form-group'>
-            <label>Name</label>
-            <input type = 'name' value ={name} onChange={(event) => setName(event.target.value)} />
-            </div>
             <div className='form-group'>
             <label>Message</label>
             <input type = 'post' value={message} onChange={(event) => setMessage(event.target.value)} />

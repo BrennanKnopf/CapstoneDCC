@@ -4,7 +4,7 @@ import axios from "axios";
 import useAuth from "../../hooks/useAuth";
 import MapContainer from "../../components/MapContainer/MapContainer";
 import Messages from "../../components/Messages/Messages";
-import DisplayMessage from "../../components/Messages/DisplayMessage";
+// import DisplayMessage from "../../DisplayMessages/DisplayMessage";
 
 
 
@@ -23,7 +23,7 @@ const HomePage = (props) => {
        <div class="row">
         <h1>Home Page for {user.username}!</h1>
           <Messages />
-          <DisplayMessage />
+          {/* <DisplayMessage message={props.message} /> */}
             <MapContainer  latitude={props.latitude} longitude= {props.longitude} />
           </div>
     </div>
