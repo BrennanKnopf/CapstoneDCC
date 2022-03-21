@@ -35,7 +35,7 @@ const DateForm = (props) => {
 
     return (
 
-        <Container className='inline'>
+        <Container className='form'>
         <Form id="dateForm" onSubmit={handleSubmit}>
         <Form.Group>
             <Form.Label>Start a new date:</Form.Label>
