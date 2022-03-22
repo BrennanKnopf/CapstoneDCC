@@ -8,7 +8,7 @@ import AccountPage from './pages/Account Page/AccountPage';
 import Navbar from "./components/NavBar/NavBar";
 import Footer from "./components/Footer/Footer";
 import PrivateRoute from "./utils/PrivateRoute";
-
+import MessagePage from './pages/MessagesPage/MessagePage';
 
 
 
@@ -22,13 +22,10 @@ import PrivateRoute from "./utils/PrivateRoute";
 
 
 function App(props) {
-
-
-
+  const[date, setDate] = useState()
+  
   const [latitude, setLatitude] = useState()
-  console.log(latitude)
   const [longitude, setLongitude] = useState()
-  console.log(longitude)
 
 
 
@@ -47,7 +44,11 @@ function App(props) {
     getLocation()
 }, [])
 
- 
+ const getDate = (someDate) => {
+   console.log("getDate parameter", someDate)
+   setDate(someDate)
+
+ }
 
 
   return (
@@ -58,13 +59,14 @@ function App(props) {
           path="/"
           element={
             <PrivateRoute>
-              <HomePage latitude={latitude} longitude= {longitude} />
+              <HomePage latitude={latitude} longitude= {longitude} getDate={getDate} />
             </PrivateRoute>
           }
         />
         <Route path="/account" element={<AccountPage/>} />
         <Route path="/register" element={<RegisterPage />} />
         <Route path="/login" element={<LoginPage />} />
+        <Route path="/messages" element={<MessagePage date={date} />} />
       </Routes>
       <Footer />
     </div>

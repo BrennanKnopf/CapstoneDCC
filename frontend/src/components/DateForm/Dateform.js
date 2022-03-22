@@ -1,6 +1,7 @@
 import React, {useState, useAuth} from 'react';
 import Form from 'react-bootstrap/Form'
-import Container from 'react-bootstrap/esm/Container';   
+import Container from 'react-bootstrap/esm/Container';  
+ 
 
 
 
@@ -10,8 +11,6 @@ const DateForm = (props) => {
     const [date_info, setDateInfo] = useState('')
     const [unique_password, setUniquePassword] = useState('')
     const [emergency_contact, setEmergencyContact] = useState('')
-    
-
 
     function handleSubmit(event) {
         event.preventDefault();
@@ -24,13 +23,11 @@ const DateForm = (props) => {
 
 
         };
-        console.log(newDate);
         props.createDate(newDate);
         setDateInfo('');
         setUniquePassword('');
         setEmergencyContact('');
     }
-
 
 
     return (

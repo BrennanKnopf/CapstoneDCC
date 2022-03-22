@@ -55,7 +55,7 @@ def user_emergency_contact(request, pk):
 
 @api_view(['GET', 'POST', 'PUT'])
 @permission_classes([IsAuthenticated])
-def user_messages(request):
+def user_messages(request, pk):
     if request.method == 'POST':
         serializer = MessagesSerializer(data=request.data)
         if serializer.is_valid():
