@@ -44,12 +44,14 @@ function App(props) {
     getLocation()
 }, [])
 
- const getDate = (someDate) => {
-   console.log("getDate parameter", someDate)
-   setDate(someDate)
+  const getDate = (someDate) => {
+    console.log("getDate parameter", someDate)
+    setDate(someDate)
 
- }
-
+  }
+  function refreshPage() {
+    window.location.reload(false);
+  }
 
   return (
     <div>
@@ -59,7 +61,7 @@ function App(props) {
           path="/"
           element={
             <PrivateRoute>
-              <HomePage latitude={latitude} longitude= {longitude} getDate={getDate} />
+              <HomePage latitude={latitude} longitude= {longitude} getDate={getDate} refreshPage={refreshPage} />
             </PrivateRoute>
           }
         />
