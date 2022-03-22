@@ -13,6 +13,4 @@ class Dater(models.Model):
 class Messages(models.Model):
     dater = models.ForeignKey(Dater, on_delete=models.CASCADE)
     emergency_contact = models.ForeignKey(Emergency_contact, on_delete=models.CASCADE, default=None)
-    first_check_in = models.CharField(max_length=100)
-    second_check_in = models.CharField(max_length=100)
-    final_warning = models.CharField(max_length=100)
+    message = models.CharField(max_length=200, default=None)

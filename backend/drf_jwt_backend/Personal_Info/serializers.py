@@ -7,8 +7,8 @@ from .models import Messages, Dater, Emergency_contact
 class MessagesSerializer(serializers.ModelSerializer):
     class Meta:
         model = Messages
-        fields = ['id', 'first_check_in', 'second_check_in', 'final_warning']
-        depth = 1
+        fields = ['id', 'dater', 'emergency_contact', 'message']
+    
 
 class DaterSerializer(serializers.ModelSerializer):
     class Meta:
@@ -18,4 +18,4 @@ class DaterSerializer(serializers.ModelSerializer):
 class Emergency_contactSerializer(serializers.ModelSerializer):
     class Meta:
         model = Emergency_contact
-        fields = ['id', 'user', 'username']
+        fields = ['id', 'user']

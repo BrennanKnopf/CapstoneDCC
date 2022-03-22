@@ -1,3 +1,4 @@
+from multiprocessing import allow_connection_pickling
 from rest_framework import status
 from rest_framework.response import Response
 from rest_framework.permissions import IsAuthenticated, AllowAny
@@ -30,18 +31,9 @@ def user_dater(request, pk):
             serializer.save(user=request.user)
             return Response(serializer.data)
 
-
-
-@api_view(['GET'])
-@permission_classes([IsAuthenticated])
-def get_all_messages(request, pk):
-    messages = Messages.objects.filter(user_id=pk)
-    serializer = MessagesSerializer(messages, many=True)
-    return Response(serializer.data)
-
 @api_view(['GET', 'POST', 'PUT'])
 @permission_classes([IsAuthenticated])
-def user_emergency_contact(request,pk):
+def user_emergency_contact(request, pk):
     print(
         'User ', f"{request.user.id} {request.user.email} {request.user.username}")
     if request.method == 'POST':
@@ -51,7 +43,7 @@ def user_emergency_contact(request,pk):
             return Response(serializer.data, status=status.HTTP_201_CREATED)
         return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
     elif request.method == 'GET':
-        emergency_contact = Emergency_contact.objects.filter(username=request.user.username)
+        emergency_contact = Emergency_contact.objects.filter(user_id=request.user_id)
         serializer = Emergency_contactSerializer(emergency_contact, many=True)
         return Response(serializer.data)
     elif request.method == 'PUT':
@@ -60,3 +52,17 @@ def user_emergency_contact(request,pk):
         if serializer.is_valid():
             serializer.save(user=request.user)
             return Response(serializer.data)
+
+@api_view(['GET', 'POST', 'PUT'])
+@permission_classes([IsAuthenticated])
+def user_messages(request):
+    if request.method == 'POST':
+        serializer = MessagesSerializer(data=request.data)
+        if serializer.is_valid():
+            serializer.save()
+            return Response(serializer.data, status=status.HTTP_201_CREATED)
+        return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+    elif request.method == 'GET':
+        message = MessagesSerializer.objects.filter(user_id=request.user_id)
+        serializer = MessagesSerializer(message, many=True)
+        return Response(serializer.data)
