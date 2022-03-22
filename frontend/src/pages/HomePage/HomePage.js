@@ -30,10 +30,10 @@ const HomePage = (props) => {
     
   }
 
-  async function createEmergencyContact(){
+  async function createEmergencyContact(newEmergencyContact){
   
-    let response = await axios.post(`http://127.0.0.1:8000/api/Personal_Info/Dater/${user.user_id}/`,  { headers: {Authorization: 'Bearer ' + token}});
-    setEmergencyContact(response.data)
+    let response = await axios.post(`http://127.0.0.1:8000/api/Personal_Info/emergency_contact/${user.user_id}/`, newEmergencyContact, { headers: {Authorization: 'Bearer ' + token}});
+    console.log(response.data)
   }
   return (
     <div className="container">

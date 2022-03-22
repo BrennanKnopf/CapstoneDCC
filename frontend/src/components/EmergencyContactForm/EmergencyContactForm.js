@@ -11,7 +11,8 @@ const EmergencyContactForm = (props) => {
     function handleSubmit(event) {
         event.preventDefault();
         let newEmergencyContact = {
-            emergencycontact: props.user.user_id,
+            user: props.user.user_id,
+            emergencycontact: props.user.user_id
         
         };
         props.createEmergencyContact(newEmergencyContact);
