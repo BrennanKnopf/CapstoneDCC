@@ -5,6 +5,7 @@ import useAuth from "../../hooks/useAuth";
 import MapContainer from "../../components/MapContainer/MapContainer";
 import DateForm from "../../components/DateForm/Dateform";
 import DateDisplay from "../../components/DateDisplay/DateDisplay";
+import EmergencyContactForm from "../../components/EmergencyContactForm/EmergencyContactForm";
 
 const HomePage = (props) => {
   // The "user" value from this Hook contains the decoded logged in user information (username, first name, id)
@@ -21,19 +22,25 @@ const HomePage = (props) => {
   async function createDate(newDate){
     // console.log("newDate: ", newDate)
     let response = await axios.post(`http://127.0.0.1:8000/api/Personal_Info/Dater/${user.user_id}/`, newDate,  { headers: {Authorization: 'Bearer ' + token}});
-    
     setDate(response.data)
-
     props.getDate(response.data)
+    // if(response.status === 201){
+    //   await props.getDateInfo()
+    // } 
     
   }
 
+  async function createEmergencyContact(){
   
+    let response = await axios.post(`http://127.0.0.1:8000/api/Personal_Info/Dater/${user.user_id}/`,  { headers: {Authorization: 'Bearer ' + token}});
+    setEmergencyContact(response.data)
+  }
   return (
     <div className="container">
         <h1>Home Page for {user.username}!</h1>
           <DateForm createDate={createDate} user={user} />
-          <DateDisplay  date={date} />
+          <DateDisplay  date={date} user={user} token={token} />
+          <EmergencyContactForm createEmergencyContact={createEmergencyContact} user={user} />
           <MapContainer  latitude={props.latitude} longitude= {props.longitude} />
     </div>
   );
