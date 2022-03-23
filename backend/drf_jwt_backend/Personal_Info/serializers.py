@@ -1,5 +1,6 @@
+from functools import partial
 from rest_framework import serializers
-from .models import Messages, Dater, Emergency_contact
+from .models import Messages, Dater
 
 
 
@@ -15,7 +16,5 @@ class DaterSerializer(serializers.ModelSerializer):
         model = Dater
         fields = ['id', 'emergency_contact', 'date_info', 'unique_password', 'user']
 
-class Emergency_contactSerializer(serializers.ModelSerializer):
-    class Meta:
-        model = Emergency_contact
-        fields = ['id', 'user']
+
+

@@ -6,13 +6,13 @@ import Container from 'react-bootstrap/esm/Container';
 const EmergencyContactForm = (props) => {
     
     const [emergencycontact, setEmergencyContact] = useState({})
+    const [user_id, setUserId] = useState()
 
 
     function handleSubmit(event) {
         event.preventDefault();
         let newEmergencyContact = {
-            user: props.user.user_id,
-            emergencycontact: props.user.user_id
+            user: user_id,
         
         };
         props.createEmergencyContact(newEmergencyContact);
@@ -20,6 +20,7 @@ const EmergencyContactForm = (props) => {
         
     }
 
+    
     
     return ( 
 

@@ -3,8 +3,8 @@ from rest_framework import status
 from rest_framework.response import Response
 from rest_framework.permissions import IsAuthenticated, AllowAny
 from rest_framework.decorators import api_view, permission_classes
-from .models import Dater, Emergency_contact, Messages
-from .serializers import DaterSerializer, Emergency_contactSerializer, MessagesSerializer
+from .models import Dater, Messages, User
+from .serializers import DaterSerializer, MessagesSerializer
 
 
 
@@ -31,31 +31,33 @@ def user_dater(request, pk):
             serializer.save(user=request.user)
             return Response(serializer.data)
 
-@api_view(['GET', 'POST', 'PUT'])
+
+
+@api_view(['GET', 'POST'])
 @permission_classes([IsAuthenticated])
-def user_emergency_contact(request, pk):
+def find_user(request, username):
     print(
         'User ', f"{request.user.id} {request.user.email} {request.user.username}")
+        
     if request.method == 'POST':
-        serializer = Emergency_contactSerializer(data=request.data)
+        serializer = DaterSerializer(data=request.data)
         if serializer.is_valid():
             serializer.save(user=request.user)
             return Response(serializer.data, status=status.HTTP_201_CREATED)
         return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
     elif request.method == 'GET':
-        emergency_contact = Emergency_contact.objects.filter(user_id=request.user_id)
-        serializer = Emergency_contactSerializer(emergency_contact, many=True)
-        return Response(serializer.data)
-    elif request.method == 'PUT':
-        emergency_contact = Emergency_contact.objects.get(pk=pk)
-        serializer = Emergency_contactSerializer(emergency_contact, data=request.data)
-        if serializer.is_valid():
-            serializer.save(user=request.user)
-            return Response(serializer.data)
+        dater = Dater.objects.get(user_id=request.user.id)
+        emergency_contact = Dater.objects.get(user__username = username)
+        print(emergency_contact)
+        dater.emergency_contact = emergency_contact
+        dater.save()
+        return Response(status=status.HTTP_200_OK)
+
+
 
 @api_view(['GET', 'POST', 'PUT'])
 @permission_classes([IsAuthenticated])
-def user_messages(request, pk):
+def user_messages(request):
     if request.method == 'POST':
         serializer = MessagesSerializer(data=request.data)
         if serializer.is_valid():
@@ -63,6 +65,6 @@ def user_messages(request, pk):
             return Response(serializer.data, status=status.HTTP_201_CREATED)
         return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
     elif request.method == 'GET':
-        message = MessagesSerializer.objects.filter(user_id=request.user_id)
+        message = Messages.objects.filter(user_id=request.user_id)
         serializer = MessagesSerializer(message, many=True)
         return Response(serializer.data)
