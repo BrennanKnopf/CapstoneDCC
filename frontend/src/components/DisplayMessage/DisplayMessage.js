@@ -7,7 +7,7 @@ const DisplayMessage = (props) => {
     
     return (
 
-
+      <div></div>
         
       );
 }

@@ -11,26 +11,28 @@ const HomePage = (props) => {
   // The "user" value from this Hook contains the decoded logged in user information (username, first name, id)
   // The "token" value is the JWT token that you will send in the header of any request requiring authentication
   const [user, token] = useAuth();
-  const [date, setDate] = useState({})
   const [username, setUserName] = useState('')
+  const [dateinfo, setDateInfo] = useState([])
   const [emergency_contact, setEmergencyContact] = useState('')
- // console.log("login credentials", user)
- // console.log("dateinformation", date)
+  
 
+  
   useEffect(() => {
-    
+    getDateInfo()
   }, [])
+
+  async function getDateInfo(){
+    console.log("Hello")
+    let response = await axios.get(`http://127.0.0.1:8000/api/Personal_Info/Dater/${user.id}/`,  { headers: {Authorization: 'Bearer ' + token}});
+    console.log(response.data)
+    setDateInfo(response.data)
+    props.getDate(response.data)
+}
 
   async function createDate(newDate){
     // console.log("newDate: ", newDate)
-    let response = await axios.post(`http://127.0.0.1:8000/api/Personal_Info/Dater/${user.user_id}/`, newDate,  { headers: {Authorization: 'Bearer ' + token}});
+    let response = await axios.post(`http://127.0.0.1:8000/api/Personal_Info/Dater/${user.id}/`, newDate,  { headers: {Authorization: 'Bearer ' + token}});
     await find_user()
-    setDate(response.data)
-    
-    props.getDate(response.data)
-   
-
-    // } 
     
   }
 
@@ -45,7 +47,7 @@ const HomePage = (props) => {
     <div className="container">
         <h1>Home Page for {user.username}!</h1>
           <DateForm createDate={createDate} user={user} find_user = {find_user} emergency_contact username={username} setUserName={setUserName}  />
-          <DateDisplay  date={date} user={user} token={token} />
+          <DateDisplay user={user} token={token} dateinfo={dateinfo}/>
           <MapContainer  latitude={props.latitude} longitude= {props.longitude} />
     </div>
   );

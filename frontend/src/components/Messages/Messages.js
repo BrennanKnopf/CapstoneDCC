@@ -11,8 +11,8 @@ const Messages = (props) => {
     function handleSubmit(event) {
         event.preventDefault();
         let newMessage = {
-            dater: props.date.user,
-            emergency_contact: props.date.emergency_contact,
+            dater: props.date[0].id,
+            emergency_contact: props.date[0].emergency_contact,
             message: message
         };
         console.log(newMessage);
@@ -27,8 +27,10 @@ const Messages = (props) => {
     
     }
 
+
+
     async function createMessage(message){
-        let response = await axios.post(`http://127.0.0.1:8000/api/Personal_Info/messages/${props.user.user_id}/`, message,  { headers: {Authorization: 'Bearer ' + props.token}});
+        let response = await axios.post(`http://127.0.0.1:8000/api/Personal_Info/messages/`, message,  { headers: {Authorization: 'Bearer ' + props.token}});
         console.log(response.data)
         setMessage(response.data)
     }
