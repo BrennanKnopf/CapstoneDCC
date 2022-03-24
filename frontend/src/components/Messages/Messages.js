@@ -44,7 +44,7 @@ const Messages = (props) => {
             <button type='submit' className='btn btn-primary'  >Send</button>
             </div>
             </div>
-    </form> 
+        </form> 
 
 
      );
