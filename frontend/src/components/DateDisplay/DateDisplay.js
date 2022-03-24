@@ -1,22 +1,38 @@
-import React from 'react';
+import React, {Fragment, useState, useEffect} from 'react';
 import Table from 'react-bootstrap/Table';
-const DateDisplay = (props) => {
-    return (
-        <Table striped bordered hover variant="dark">
-        <thead>
-                <tr>
-                <th>Date Info</th>
-                <th>Emergency Contact</th>
-                </tr>
-        </thead>
-        <tbody>
+import axios from 'axios';
 
-            <tr>
-                <td>{props.date.date_info}</td>
-                <td>{props.date.emergency_contact}</td>
-            </tr>
-            </tbody>
+
+
+const DateDisplay = (props) => {
+  
+    
+  
+
+
+
+    
+    return (
+        <Fragment>
+            <Table striped bordered hover variant="dark">
+                <thead>
+                        <tr>
+                        <th>Date Info </th>
+                        <th>Emergency Contact</th>
+                        </tr>
+                </thead>
+                <tbody>
+                {props.dateinfo.map((date) => {
+                    return(
+                    <tr>
+                        <td> {date.date_info}</td>
+                        <td> {date.emergency_contact}</td>
+                    </tr>
+                    )}
+                )}
+                </tbody>
             </Table>
+        </Fragment>
         ) 
      
 }

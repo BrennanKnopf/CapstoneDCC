@@ -1,4 +1,5 @@
 import React, {useState} from 'react';
+import axios from 'axios';
 
 
 
@@ -10,10 +11,13 @@ const Messages = (props) => {
     function handleSubmit(event) {
         event.preventDefault();
         let newMessage = {
+            dater: props.date[0].id,
+            emergency_contact: props.date[0].emergency_contact,
             message: message
         };
         console.log(newMessage);
         addNewMessage(newMessage)
+        createMessage(newMessage)
     }
     function addNewMessage(newMessage){
 
@@ -22,6 +26,14 @@ const Messages = (props) => {
         setMessage(tempMessage)
     
     }
+
+
+
+    async function createMessage(message){
+        let response = await axios.post(`http://127.0.0.1:8000/api/Personal_Info/messages/`, message,  { headers: {Authorization: 'Bearer ' + props.token}});
+        console.log(response.data)
+        setMessage(response.data)
+    }
     
     return ( 
         <form onSubmit={handleSubmit} className ='form-grid' >
@@ -29,7 +41,7 @@ const Messages = (props) => {
             <label>Message</label>
             <input type = 'post' value={message} onChange={(event) => setMessage(event.target.value)} />
             <div className="d-flex justify-content-end">
-            <button type='submit' className='btn btn-primary'  >Create</button>
+            <button type='submit' className='btn btn-primary'  >Send</button>
             </div>
             </div>
     </form> 
