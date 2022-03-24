@@ -18,4 +18,4 @@ class DaterSerializer(serializers.ModelSerializer):
 class Emergency_contactSerializer(serializers.ModelSerializer):
     class Meta:
         model = Emergency_contact
-        fields = ['id', 'user']
+        fields = ['id', 'user', 'username']
