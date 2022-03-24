@@ -65,6 +65,8 @@ def user_messages(request):
             return Response(serializer.data, status=status.HTTP_201_CREATED)
         return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
     elif request.method == 'GET':
-        message = Messages.objects.filter(user_id=request.user_id)
+        message = Messages.objects.filter(dater_id=request.user.id)
         serializer = MessagesSerializer(message, many=True)
-        return Response(serializer.data)
+        return Response(serializer.data, status=status.HTTP_200_OK)
+
+    
