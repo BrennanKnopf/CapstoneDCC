@@ -57,7 +57,7 @@ def find_user(request, username):
 
 @api_view(['GET', 'POST', 'PUT'])
 @permission_classes([IsAuthenticated])
-def user_messages(request):
+def user_sent_messages(request):
     if request.method == 'POST':
         serializer = MessagesSerializer(data=request.data)
         if serializer.is_valid():
@@ -69,4 +69,16 @@ def user_messages(request):
         serializer = MessagesSerializer(message, many=True)
         return Response(serializer.data, status=status.HTTP_200_OK)
 
-    
+@api_view(['GET', 'POST', 'PUT'])
+@permission_classes([IsAuthenticated])
+def user_received_messages(request):
+    if request.method == 'POST':
+        serializer = MessagesSerializer(data=request.data)
+        if serializer.is_valid():
+            serializer.save()
+            return Response(serializer.data, status=status.HTTP_201_CREATED)
+        return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+    elif request.method == 'GET':
+        message = Messages.objects.filter(emergency_contact_id= request.user.id) 
+        serializer = MessagesSerializer(message, many=True)
+        return Response(serializer.data, status=status.HTTP_200_OK)   
