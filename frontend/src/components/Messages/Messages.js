@@ -1,12 +1,30 @@
-import React, {useState} from 'react';
+import React, {useState, useEffect, useRef} from 'react';
 import axios from 'axios';
+
 
 
 
 const Messages = (props) => {
     
     const [message, setMessage] = useState('');
-    
+    const [timer, setTimer] = useState(3600);
+    console.log(timer)
+    const id = useRef(null);
+    const clear = () => {
+      window.clearInterval(id.current);
+    };
+    useEffect(() => {
+      id.current = window.setInterval(() => {
+        setTimer((time) => time - 1);
+      }, 3600);
+      return () => clear();
+    }, []);
+  
+   useEffect(() => {
+      if (timer === 0) {
+        clear();
+      }
+    }, [timer]);
    
     function handleSubmit(event) {
         event.preventDefault();
@@ -18,7 +36,10 @@ const Messages = (props) => {
         console.log(newMessage);
         addNewMessage(newMessage)
         createMessage(newMessage)
+        setTimer()
+        
     }
+    
     function addNewMessage(newMessage){
 
         let tempMessage = [...message, newMessage]
@@ -30,16 +51,19 @@ const Messages = (props) => {
 
 
     async function createMessage(message){
-        let response = await axios.post(`http://127.0.0.1:8000/api/Personal_Info/messages/`, message,  { headers: {Authorization: 'Bearer ' + props.token}});
+        let response = await axios.post(`http://127.0.0.1:8000/api/Personal_Info/messages/sent/`, message,  { headers: {Authorization: 'Bearer ' + props.token}});
         console.log(response.data)
         setMessage(response.data)
     }
     
+   
+    
+
     return ( 
         <form onSubmit={handleSubmit} className ='form-grid' >
             <div className='form-group'>
             <label>Message</label>
-            <input type = 'post' value={message} onChange={(event) => setMessage(event.target.value)} />
+            <input type = 'post'  onChange={(event) => setMessage(event.target.value)} />
             <div className="d-flex justify-content-end">
             <button type='submit' className='btn btn-primary'  >Send</button>
             </div>

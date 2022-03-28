@@ -27,6 +27,8 @@ const DateDisplay = (props) => {
                     <tr>
                         <td> {date.date_info}</td>
                         <td> {date.emergency_contact}</td>
+                        <input>
+                        </input>
                     </tr>
                     )}
                 )}

@@ -42,13 +42,20 @@ const HomePage = (props) => {
     console.log(response.data)
     setEmergencyContact(response.data)
   }
-  
+
+  async function deleteDate(){
+    let response = await axios.delete(`http://127.0.0.1:8000/api/Personal_Info/Dater/${user.id}/`,  { headers: {Authorization: 'Bearer ' + token}});
+    console.log(response)
+    if(response.status === 204){
+    }
+  }
+
   return (
     <div className="container">
         <h1>Home Page for {user.username}!</h1>
           <DateForm createDate={createDate} user={user} find_user = {find_user} emergency_contact username={username} setUserName={setUserName}  />
-          <DateDisplay user={user} token={token} dateinfo={dateinfo}/>
-          <MapContainer  latitude={props.latitude} longitude= {props.longitude} />
+          <DateDisplay user={user} token={token} dateinfo={dateinfo} deleteDate={deleteDate}/>
+          {/* <MapContainer  latitude={props.latitude} longitude= {props.longitude} /> */}
     </div>
   );
 };

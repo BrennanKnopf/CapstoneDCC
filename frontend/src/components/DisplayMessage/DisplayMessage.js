@@ -7,7 +7,7 @@ const DisplayMessage = (props) => {
     props.getEmergencyContactMessages()
   }, []) 
     
-    
+    console.log(props.timer)
     return (
 
       <div className='container'>
@@ -17,6 +17,7 @@ const DisplayMessage = (props) => {
                         <tr>
                         <th>Messages</th>
                         <th>Emergency Contact</th>
+                        <th>timer</th>
                         </tr>
                 </thead>
                 <tbody>
@@ -25,6 +26,7 @@ const DisplayMessage = (props) => {
                     <tr>
                         <td> {date.message}</td>
                         <td> {date.emergency_contact}</td>
+                        <td> {props.timer}</td>
                     </tr>
                     )}
                 )}
@@ -42,7 +44,7 @@ const DisplayMessage = (props) => {
                     return(
                     <tr>
                         <td> {date.message}</td>
-                        <td> {date.dater}</td>
+                        {/* <td> {date.dater}</td> */}
                     </tr>
                     )}
                 )}

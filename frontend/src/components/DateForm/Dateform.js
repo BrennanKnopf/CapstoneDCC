@@ -19,16 +19,14 @@ const DateForm = (props) => {
             user: props.user.id,
             date_info: date_info,
             unique_password: unique_password,
-            // emergency_contact: emergency_contact,
+         
             
 
 
         };
-        // props.find_user(emergency_contact)
         props.createDate(newDate);
         setDateInfo('');
         setUniquePassword('');
-        // setEmergencyContact('');
     }
 
 

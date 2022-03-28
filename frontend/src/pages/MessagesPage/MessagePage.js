@@ -12,8 +12,6 @@ const MessagePage = (props) => {
     const [user, token] = useAuth();
     const [datemessage, setDateMessage] = useState([])
     const [ecmessage, setECMessage] = useState([])
-    console.log(datemessage)
-    console.log(ecmessage)
    
    
    
@@ -33,14 +31,12 @@ const MessagePage = (props) => {
     useEffect(() => {
         getUserMessages()
       }, [])
-    //   useEffect(() => {
-    //     getEmergencyContactMessages()
-    //   }, []) 
+
     return (  
         <div className='container' >
             <DateDisplay  user={user} token={token} dateinfo={props.date} />
             <Messages date={props.date} user={user} token={token}   />
-            <DisplayMessage datemessage={datemessage} ecmessage={ecmessage} getEmergencyContactMessages={getEmergencyContactMessages}  />
+            <DisplayMessage datemessage={datemessage} ecmessage={ecmessage} getEmergencyContactMessages={getEmergencyContactMessages} timer={props.timer} />
         </div>
     );
 }

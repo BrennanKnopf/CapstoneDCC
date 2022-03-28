@@ -30,6 +30,12 @@ def user_dater(request, pk):
         if serializer.is_valid():
             serializer.save(user=request.user)
             return Response(serializer.data)
+    elif request.method == 'DELETE':
+        dater = Dater.objects.get(dater_id=request.id)
+        serializer = DaterSerializer(dater, data=request.data)
+        if serializer.is_valid():
+            dater.delete()
+            return Response(status=status.HTTP_204_NO_CONTENT)
 
 
 
@@ -55,7 +61,7 @@ def find_user(request, username):
 
 
 
-@api_view(['GET', 'POST', 'PUT'])
+@api_view(['GET', 'POST'])
 @permission_classes([IsAuthenticated])
 def user_sent_messages(request):
     if request.method == 'POST':
@@ -68,8 +74,10 @@ def user_sent_messages(request):
         message = Messages.objects.filter(dater__user_id= request.user.id) 
         serializer = MessagesSerializer(message, many=True)
         return Response(serializer.data, status=status.HTTP_200_OK)
+   
 
-@api_view(['GET', 'POST', 'PUT'])
+
+@api_view(['GET', 'POST'])
 @permission_classes([IsAuthenticated])
 def user_received_messages(request):
     if request.method == 'POST':
@@ -82,3 +90,17 @@ def user_received_messages(request):
         message = Messages.objects.filter(emergency_contact_id= request.user.id) 
         serializer = MessagesSerializer(message, many=True)
         return Response(serializer.data, status=status.HTTP_200_OK)   
+
+@api_view(['GET', 'POST'])
+@permission_classes([IsAuthenticated])
+def ec_sent_messages(request):
+    if request.method == 'POST':
+        serializer = MessagesSerializer(data=request.data)
+        if serializer.is_valid():
+            serializer.save()
+            return Response(serializer.data, status=status.HTTP_201_CREATED)
+        return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+    elif request.method == 'GET':
+        message = Messages.objects.filter(dater_id= request.dater.id) 
+        serializer = MessagesSerializer(message, many=True)
+        return Response(serializer.data, status=status.HTTP_200_OK)
