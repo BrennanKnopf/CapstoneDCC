@@ -16,7 +16,7 @@ const DateForm = (props) => {
     function handleSubmit(event) {
         event.preventDefault();
         let newDate = {
-            user: props.user.user_id,
+            user: props.user.id,
             date_info: date_info,
             unique_password: unique_password,
             // emergency_contact: emergency_contact,
