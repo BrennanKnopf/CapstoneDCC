@@ -7,8 +7,22 @@ import axios from 'axios';
 const Messages = (props) => {
     
     const [message, setMessage] = useState('');
+    const [timestart, setTimeStart] = useState(false)
+    console.log(timestart)
     const [timer, setTimer] = useState(3600);
     console.log(timer)
+    
+    
+    
+    
+    function startTimer(){
+      if (message > 0){
+      setTimeStart(true)
+    }}
+    
+    
+    
+    
     const id = useRef(null);
     const clear = () => {
       window.clearInterval(id.current);
@@ -18,7 +32,7 @@ const Messages = (props) => {
         setTimer((time) => time - 1);
       }, 3600);
       return () => clear();
-    }, []);
+    }, [timestart]);
   
    useEffect(() => {
       if (timer === 0) {
@@ -36,7 +50,9 @@ const Messages = (props) => {
         console.log(newMessage);
         addNewMessage(newMessage)
         createMessage(newMessage)
+        setInterval()
         setTimer()
+        startTimer(true)
         
     }
     
