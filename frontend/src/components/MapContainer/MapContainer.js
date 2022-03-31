@@ -4,15 +4,15 @@ import Location from '../Location/Location';
 
 
 export class MapContainer extends React.Component {
-
+    
 
 render() {
     return (
     <div >
       <Map google={this.props.google} zoom={14} style={{position:'relative', maxWidth:'400px', height:'400px'}}
       initialCenter={{
-        lat: this.props.latitude,
-        lng: this.props.longitude
+        lat: this.props.newLat,
+        lng: this.props.newLong
       }}
       onClick={this.onMapClicked}>
         
@@ -24,7 +24,7 @@ render() {
             </div>
         </InfoWindow>
       </Map>
-      <Location />
+      {/* <Location /> */}
     </div>
     );
   }

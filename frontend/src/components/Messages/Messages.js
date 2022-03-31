@@ -6,26 +6,23 @@ import axios from 'axios';
 const Messages = (props) => {
     
     const [message, setMessage] = useState('');
-
    
     function handleSubmit(event) {
         event.preventDefault();
         let newMessage = {
             dater: props.date[0].id,
             emergency_contact: props.date[0].emergency_contact,
-            message: message
+            message: message,
+            latitude: props.newLat,
+            longitude: props.newLong
         };
         addNewMessage(newMessage)
         createMessage(newMessage)
-        props.start()
     }
     
     function addNewMessage(newMessage){
-
         let tempMessage = [...message, newMessage]
-    
         setMessage(tempMessage)
-    
     }
 
 

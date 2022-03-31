@@ -3,7 +3,7 @@ import {Button} from 'react-bootstrap';
 import Modal from "react-bootstrap/Modal"
 // import "bootstrap/dist/css/bootstrap.min.css"
 
-const CheckinModal = (props) => {
+const CheckinModalFIRW = (props) => {
     
     const [show, setShow] = useState(false);
     const [newLat, setNewLat] = useState();
@@ -39,15 +39,15 @@ const CheckinModal = (props) => {
         <>
             <Modal show={show} onHide={handleClose}>
                 <Modal.Header closeButton>
-                    <Modal.Title>Check-in</Modal.Title>
+                    <Modal.Title>First Warning Check-in</Modal.Title>
                 </Modal.Header>
-                <Modal.Body>Hey, its time to let your friend know things are ok</Modal.Body>
+                <Modal.Body>Hey, you missed your first Checkin. Please Respond</Modal.Body>
                 <Modal.Footer>
                     <Button variant="primary" onClick={handleClose}>Confirm</Button>
                 </Modal.Footer>
             </Modal>
         </>
-    )
+    );
 }
  
-export default CheckinModal;
+export default CheckinModalFIRW;

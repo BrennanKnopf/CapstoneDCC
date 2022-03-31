@@ -64,14 +64,14 @@ function App(props) {
           path="/"
           element={
             <PrivateRoute>
-              <HomePage latitude={latitude} longitude= {longitude} getDate={getDate} refreshPage={refreshPage} />
+              <HomePage  getDate={getDate} refreshPage={refreshPage} />
             </PrivateRoute>
           }
         />
         <Route path="/account" element={<AccountPage/>} />
         <Route path="/register" element={<RegisterPage />} />
         <Route path="/login" element={<LoginPage />} />
-        <Route path="/messages" element={<MessagePage date={date} getLocation={getLocation} />} />
+        <Route path="/messages" element={<MessagePage date={date} getLocation={getLocation} latitude={latitude} longitude= {longitude} />} />
       </Routes>
       <Footer />
     </div>

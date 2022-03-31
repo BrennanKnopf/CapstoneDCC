@@ -15,3 +15,5 @@ class Messages(models.Model):
     emergency_contact = models.ForeignKey(Dater, on_delete=models.CASCADE, default=None, related_name= "emergency_contact2")
     message = models.CharField(max_length=200, default=None)
     created = models.DateTimeField(auto_now_add=True)
+    latitude = models.IntegerField(default =None)
+    longitude = models.IntegerField(default =None)

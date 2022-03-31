@@ -12,7 +12,7 @@ const DisplayMessage = (props) => {
 
       <div className='container'>
         <Fragment>
-            <Table striped bordered hover variant="dark">
+            <Table striped bordered hover variant="light">
                 <thead>
                         <tr>
                         <th>Messages</th>
@@ -30,7 +30,7 @@ const DisplayMessage = (props) => {
                 )}
                 </tbody>
             </Table>
-            <Table striped bordered hover variant="dark">
+            <Table striped bordered hover variant="light">
                 <thead>
                         <tr>
                         <th>Messages</th>

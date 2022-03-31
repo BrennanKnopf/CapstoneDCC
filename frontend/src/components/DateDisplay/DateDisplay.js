@@ -12,7 +12,7 @@ const DateDisplay = (props) => {
     
     return (
         <Fragment>
-            <Table striped bordered hover variant="dark">
+            <Table striped bordered hover variant="light">
                 <thead>
                         <tr>
                         <th>Date Info </th>
