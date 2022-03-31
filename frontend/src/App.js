@@ -21,6 +21,9 @@ import MessagePage from './pages/MessagesPage/MessagePage';
 
 
 
+
+
+
 function App(props) {
   const[date, setDate] = useState()
   
@@ -68,7 +71,7 @@ function App(props) {
         <Route path="/account" element={<AccountPage/>} />
         <Route path="/register" element={<RegisterPage />} />
         <Route path="/login" element={<LoginPage />} />
-        <Route path="/messages" element={<MessagePage date={date} />} />
+        <Route path="/messages" element={<MessagePage date={date} getLocation={getLocation} />} />
       </Routes>
       <Footer />
     </div>

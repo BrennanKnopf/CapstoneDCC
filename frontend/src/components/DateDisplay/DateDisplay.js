@@ -6,8 +6,6 @@ import Table from 'react-bootstrap/Table';
 
 const DateDisplay = (props) => {
   
-    
-  
 
 
 

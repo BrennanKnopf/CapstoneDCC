@@ -2,7 +2,6 @@ import React from "react";
 import { useEffect, useState } from "react";
 import axios from "axios";
 import useAuth from "../../hooks/useAuth";
-import MapContainer from "../../components/MapContainer/MapContainer";
 import DateForm from "../../components/DateForm/Dateform";
 import DateDisplay from "../../components/DateDisplay/DateDisplay";
 

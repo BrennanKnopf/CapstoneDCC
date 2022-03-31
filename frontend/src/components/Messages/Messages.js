@@ -1,44 +1,12 @@
-import React, {useState, useEffect, useRef} from 'react';
+import React, {useState} from 'react';
 import axios from 'axios';
-
 
 
 
 const Messages = (props) => {
     
     const [message, setMessage] = useState('');
-    const [timestart, setTimeStart] = useState(false)
-    console.log(timestart)
-    const [timer, setTimer] = useState(3600);
-    console.log(timer)
-    
-    
-    
-    
-    function startTimer(){
-      if (message > 0){
-      setTimeStart(true)
-    }}
-    
-    
-    
-    
-    const id = useRef(null);
-    const clear = () => {
-      window.clearInterval(id.current);
-    };
-    useEffect(() => {
-      id.current = window.setInterval(() => {
-        setTimer((time) => time - 1);
-      }, 3600);
-      return () => clear();
-    }, [timestart]);
-  
-   useEffect(() => {
-      if (timer === 0) {
-        clear();
-      }
-    }, [timer]);
+
    
     function handleSubmit(event) {
         event.preventDefault();
@@ -47,13 +15,9 @@ const Messages = (props) => {
             emergency_contact: props.date[0].emergency_contact,
             message: message
         };
-        console.log(newMessage);
         addNewMessage(newMessage)
         createMessage(newMessage)
-        setInterval()
-        setTimer()
-        startTimer(true)
-        
+        props.start()
     }
     
     function addNewMessage(newMessage){
@@ -68,7 +32,6 @@ const Messages = (props) => {
 
     async function createMessage(message){
         let response = await axios.post(`http://127.0.0.1:8000/api/Personal_Info/messages/sent/`, message,  { headers: {Authorization: 'Bearer ' + props.token}});
-        console.log(response.data)
         setMessage(response.data)
     }
     

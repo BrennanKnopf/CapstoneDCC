@@ -1,5 +1,5 @@
 import React, {Fragment, useEffect} from 'react';
-import Table from 'react-bootstrap/esm/Table';
+import Table from 'react-bootstrap/Table';
 
 const DisplayMessage = (props) => {
    
@@ -7,7 +7,7 @@ const DisplayMessage = (props) => {
     props.getEmergencyContactMessages()
   }, []) 
     
-    console.log(props.timer)
+  
     return (
 
       <div className='container'>
@@ -17,7 +17,6 @@ const DisplayMessage = (props) => {
                         <tr>
                         <th>Messages</th>
                         <th>Emergency Contact</th>
-                        <th>timer</th>
                         </tr>
                 </thead>
                 <tbody>
@@ -26,7 +25,6 @@ const DisplayMessage = (props) => {
                     <tr>
                         <td> {date.message}</td>
                         <td> {date.emergency_contact}</td>
-                        <td> {props.timer}</td>
                     </tr>
                     )}
                 )}
